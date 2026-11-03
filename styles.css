@@ -1,0 +1,397 @@
+
+/* General page settings */
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    font-family: Georgia, "Times New Roman", serif;
+    color: white;
+    background: #101a20;
+}
+
+/* Full-screen experience */
+.shrine-scene {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    min-height: 450px;
+    overflow: hidden;
+    background: #101a20;
+}
+
+/* Shrine background layers */
+.background {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;}
+
+.daytime {
+    background-image: url("assets/shrine.png");
+}
+
+.nighttime {
+    background-image: url("assets/evening-shrine.png");
+}
+
+.midnight {
+    background-image: url("assets/midnight-shrine.png");
+}
+
+.background.active {
+    opacity: 1;
+}
+
+/* Gradient to keep text readable */
+.overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0.58),
+        rgba(0, 0, 0, 0.08)
+    );
+    pointer-events: none;
+}
+
+/* Shrine welcome content */
+.welcome {
+    position: absolute;
+    z-index: 2;
+    left: 7%;
+    bottom: 18%;
+    max-width: 580px;
+}
+
+.subtitle {
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+h1 {
+    font-size: clamp(40px, 5vw, 76px);
+    font-weight: normal;
+    line-height: 1.1;
+    margin: 18px 0;
+}
+
+.description {
+    font-size: 17px;
+    line-height: 1.7;
+    max-width: 480px;
+}
+
+/* Buttons */
+.button-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 25px;
+}
+
+button {
+    padding: 15px 25px;
+    background: rgba(0, 0, 0, 0.25);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 3px;
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+button:focus-visible {
+    outline: 2px solid white;
+    outline-offset: 4px;
+}
+
+/* Shrine playback indicator */
+.audio-info {
+    position: absolute;
+    z-index: 2;
+    right: 5%;
+    bottom: 7%;
+    display: flex;
+    gap: 20px;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+
+/* Festival view */
+.festival-view {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    background-image: url("assets/festival.jpg");
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+}
+
+.festival-view[hidden] {
+    display: none;
+}
+
+/* Festival image layers for smooth transitions */
+.festival-background {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+}
+
+.festival-background.active {
+    opacity: 1;
+}
+
+/* Festival dark gradient */
+.festival-view::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0.55),
+        rgba(0, 0, 0, 0.08)
+    );
+    pointer-events: none;
+}
+
+/* Festival content */
+.festival-message {
+    position: absolute;
+    left: 7%;
+    bottom: 15%;
+    z-index: 2;
+    max-width: 500px;
+}
+
+.festival-message h2 {
+    font-size: clamp(32px, 4vw, 50px);
+    font-weight: normal;
+    margin: 18px 0;
+}
+
+.festival-message p {
+    font-size: 17px;
+    line-height: 1.6;
+}
+
+/* Festival playback indicator */
+.festival-info {
+    position: absolute;
+    right: 5%;
+    bottom: 7%;
+    z-index: 2;
+    display: flex;
+    gap: 20px;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+
+.festival-info[hidden],
+button[hidden] {
+    display: none;
+}
+
+
+/* Smooth transitions between shrine and festival */
+.festival-view {
+    opacity: 1;
+    visibility: visible;
+    transition:
+        opacity 1.5s ease-in-out,
+        visibility 1.5s;
+}
+
+.festival-view[hidden] {
+    display: block;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+/* Smoothly fade the festival content */
+.festival-message,
+.festival-info {
+    transition: opacity 1.5s ease-in-out;
+}
+
+
+/* Footer */
+footer {
+    position: absolute;
+    z-index: 2;
+    left: 7%;
+    bottom: 5%;
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    opacity: 0.75;
+}
+
+/* Mobile layout */
+@media (max-width: 600px) {
+    .welcome,
+    .festival-message {
+        left: 6%;
+        right: 6%;
+        bottom: 20%;
+    }
+
+    .description,
+    .festival-message p {
+        font-size: 15px;
+    }
+
+    .audio-info,
+    .festival-info {
+        right: 6%;
+        bottom: 10%;
+        font-size: 11px;
+    }
+
+    button {
+        padding: 13px 18px;
+    }
+
+    footer {
+        left: 6%;
+        bottom: 4%;
+        max-width: 85%;
+    }
+}
+
+
+/* Minimal playback timeline */
+.playback-controls {
+    position: absolute;
+    z-index: 2;
+    left: 7%;
+    right: 7%;
+    bottom: 9%;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Slider container */
+.timeline {
+    flex: 1;
+    min-width: 0;
+}
+
+/* Remove default browser slider appearance */
+#progressBar {
+    -webkit-appearance: none;
+    appearance: none;
+    display: block;
+    width: 100%;
+    height: 3px;
+    margin: 0;
+    border: none;
+    border-radius: 3px;
+    outline: none;
+    cursor: pointer;
+
+    background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0.95) 0%,
+        rgba(255, 255, 255, 0.95) var(--progress, 0%),
+        rgba(255, 255, 255, 0.35) var(--progress, 0%),
+        rgba(255, 255, 255, 0.35) 100%
+    );
+}
+
+/* Chrome / Safari slider handle */
+#progressBar::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: white;
+    border: none;
+    cursor: grab;
+    transition: transform 0.2s ease;
+}
+
+#progressBar::-webkit-slider-thumb:hover {
+    transform: scale(1.3);
+}
+
+#progressBar::-webkit-slider-thumb:active {
+    cursor: grabbing;
+}
+
+/* Firefox slider handle */
+#progressBar::-moz-range-thumb {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: white;
+    border: none;
+    cursor: grab;
+}
+
+/* Playback information */
+.playback-controls .audio-info {
+    position: static;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    flex-shrink: 0;
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+}
+
+.time-separator,
+.scene-divider {
+    opacity: 0.5;
+}
+
+.scene-divider {
+    margin: 0 7px;
+}
+
+/* Mobile layout */
+@media (max-width: 600px) {
+    .playback-controls {
+        left: 6%;
+        right: 6%;
+        bottom: 11%;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 14px;
+    }
+
+    .playback-controls .audio-info {
+        justify-content: space-between;
+        font-size: 10px;
+    }
+}
+

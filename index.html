@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Echoes of the Shrine</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+
+    <main class="shrine-scene">
+
+        <!-- Full-screen shrine backgrounds -->
+        <div class="background daytime active" id="daytime"></div>
+        <div class="background nighttime" id="nighttime"></div>
+        <div class="background midnight" id="midnight"></div>
+
+        <div class="overlay"></div>
+
+        <!-- Shrine introduction and controls -->
+        <section class="welcome">
+            <p class="subtitle">宮水神社 · MIYAMIZU SHRINE</p>
+
+            <h1>Echoes of the Shrine</h1>
+
+            <p class="description">
+                Experience the peaceful rhythms of Itomori, from quiet mornings at the shrine to lively evenings at the festival.
+            </p>
+
+            <div class="button-group">
+                <button id="playBtn" type="button">
+                    Enter the Shrine
+                </button>
+
+                <button id="festivalBtn" type="button">
+                    Visit the Festival
+                </button>
+            </div>
+        </section>
+
+        <!-- Shrine soundscape -->
+        <audio id="player" preload="metadata">
+            <source src="assets/lab5_soundscape.mp3" type="audio/mpeg">
+            Your browser does not support HTML5 audio.
+        </audio>
+
+        <!-- Festival soundscape -->
+        <audio id="festivalAudio" preload="metadata">
+            <source src="assets/festival-ambiance.mp3" type="audio/mpeg">
+        </audio>
+
+        <!-- Quiet daytime festival preparations -->
+        <audio id="constructionAudio" preload="metadata" loop>
+            <source src="assets/fesival-construction.mp3" type="audio/mpeg">
+        </audio>
+
+        <!-- Shrine playback timeline -->
+        <div class="playback-controls">
+
+            <div class="timeline">
+                <input
+                    type="range"
+                    id="progressBar"
+                    min="0"
+                    max="90"
+                    value="0"
+                    step="0.1"
+                    aria-label="Seek through shrine soundscape"
+                >
+            </div>
+
+            <div class="audio-info">
+                <span id="timeDisplay">0:00</span>
+                <span class="time-separator">/</span>
+                <span id="durationDisplay">1:30</span>
+                <span class="scene-divider">·</span>
+                <span id="sceneLabel">Morning at the Shrine</span>
+            </div>
+
+        </div>
+
+
+        <!-- Festival overlay -->
+        <section class="festival-view" id="festivalView" hidden>
+
+            <div class="festival-message">
+                <p class="subtitle">糸守町 · ITOMORI</p>
+
+                <h2 id="festivalTitle">Festival Preparations</h2>
+
+                <p id="festivalDescription">
+                    Come back later, they're still setting up.
+                </p>
+
+                <div class="button-group">
+                    <button id="returnBtn" type="button">
+                        Return to Shrine Entrance
+                    </button>
+
+                    <button id="festivalPlayBtn"
+                            type="button" hidden>
+                        Pause Festival
+                    </button>
+                </div>
+            </div>
+
+            <div class="festival-info" id="festivalInfo" hidden>
+                <span id="festivalTime">0:00</span>
+                <span id="festivalSceneLabel">Evening Festival</span>
+            </div>
+
+        </section>
+
+        <footer>
+            Inspired by Your Name (2016) ·
+            A non-commercial educational project
+        </footer>
+
+    </main>
+
+</body>
+
+</html>
